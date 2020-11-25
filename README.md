@@ -24,6 +24,7 @@ Now what if you can instantly switch to other chat(you can call it your spot ser
 * Rails Version - 6.0.3
 * App on Spotify for Developer - https://developer.spotify.com/dashboard
 * Twilio Account and Whatsapp Sandbox
+* ngrok setup
 
 #### Steps to Setup on local machine-
 **I am not adding steps to setup spotify app and sandbox**
@@ -31,7 +32,9 @@ Now what if you can instantly switch to other chat(you can call it your spot ser
 * 2) Install the required gems - bundle install
 * 3) Type **bundle exec figaro install** to install some additional files required
 * 4) Add SPOTIFY_KEY, SPOTIFY_SECRET, SPOTIFY_USER_ID, SPOTIFY_USER_TOKEN, SPOTIFY_USER_REFRESH_TOKEN in application.yml file 
-First two values you will get from App you have created on spotify and other three you need to get by running server using **rails s** and click on **Sign in with Spotify** option and follow the procedure there
+First two values you will get from App you have created on spotify and other three you need to get by running server using **rails s** and setup ngrok.
+Add the [ngrok_link]/twilio/messages in WHEN A MESSAGE COMES IN on https://www.twilio.com/console/sms/whatsapp/sandbox and open ngrok link into your browser and 
+click on **Sign in with Spotify** option and follow the procedure there
 
 Follow **Requirements to just try the app and suggest me your favorite songs via this app** to setup whatsapp bot and then you are good to go for your Spot_Search app
 
