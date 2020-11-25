@@ -34,3 +34,5 @@ Now what if you can instantly switch to other chat(you can call it your spot ser
 First two values you will get from App you have created on spotify and other three you need to get by running server using **rails s** and click on **Sign in with Spotify** option and follow the procedure there
 
 Follow **Requirements to just try the app and suggest me your favorite songs via this app** to setup whatsapp bot and then you are good to go for your Spot_Search app
+
+Thanks for reading!!!!
