@@ -1,11 +1,10 @@
 class Twilio::MessagesController < ApplicationController
   skip_before_action :verify_authenticity_token
-  
+  before_action :set_user
   def create
-    byebug
-    user_id = ENV['SPOTIFY_USER_ID'] 
-    token = ENV['SPOTIFY_USER_TOKEN'] 
-    refresh_token = ENV['SPOTIFY_USER_REFRESH_TOKEN']
+    user_id = @user.user_id
+    token = @user.access_token
+    refresh_token = @user.refresh_token
     @user = RSpotify::User.new({
           'id' => user_id,
           'credentials' => {
@@ -34,5 +33,22 @@ class Twilio::MessagesController < ApplicationController
     render xml: response.to_xml
 
     session[:track_keyword] = track_keyword
+  end
+
+  private
+
+  def set_user
+    @user = User.first
+    if @user.access_token_expired?
+      request_body = {
+        grant_type: 'refresh_token', 
+        refresh_token: @user.refresh_token,
+        client_id: ENV['SPOTIFY_KEY'],
+        client_secret: ENV['SPOTIFY_SECRET']
+      }
+      response = RestClient.post('https://accounts.spotify.com/api/token', request_body)
+      json_response = JSON.parse(response)
+      @user.update(access_token: json_response["access_token"])
+    end
   end
 end
