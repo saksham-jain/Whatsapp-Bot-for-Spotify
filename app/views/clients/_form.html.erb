@@ -1,0 +1,9 @@
+<%= form_with model: Client, url: clients_path, remote: true   do |form| %>
+  <%= form.label :client_id %>
+  <%= form.text_field :client_id %>
+
+  <%= form.label :client_secret %>
+  <%= form.text_field :client_secret %>
+
+  <%= form.submit 'Submit' %>
+<% end %>
