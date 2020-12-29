@@ -3,7 +3,9 @@ class HomeController < ApplicationController
   end
 
   def logged_in
+    byebug
     spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
+
     @user_id = spotify_user.id
     @credentials = spotify_user.credentials
   end

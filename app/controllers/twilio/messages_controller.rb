@@ -2,6 +2,7 @@ class Twilio::MessagesController < ApplicationController
   skip_before_action :verify_authenticity_token
   
   def create
+    byebug
     user_id = ENV['SPOTIFY_USER_ID'] 
     token = ENV['SPOTIFY_USER_TOKEN'] 
     refresh_token = ENV['SPOTIFY_USER_REFRESH_TOKEN']
