@@ -4,6 +4,8 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.create(client_params)
+    session[:client_id] = client_params[:client_id]
+    session[:client_secret] = client_params[:client_secret]
     redirect_to root_path
   end
 

@@ -1,9 +1,9 @@
-<%= form_with model: Client, url: clients_path, remote: true   do |form| %>
+<%= form_with model: Client, url: clients_path, remote: true do |form| %>
   <%= form.label :client_id %>
-  <%= form.text_field :client_id %>
+  <%= form.text_field :client_id, minlength: 32, maxlength: 32, required: true %>
 
   <%= form.label :client_secret %>
-  <%= form.text_field :client_secret %>
+  <%= form.password_field :client_secret, minlength: 32, maxlength: 32, required: true %>
 
   <%= form.submit 'Submit' %>
 <% end %>

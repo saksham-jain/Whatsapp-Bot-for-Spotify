@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 
   def index
     @param = {
-      client_id: ENV['SPOTIFY_KEY'],
+      client_id: session[:client_id],
       response_type: "code",
       scope: 'user-read-email playlist-modify-public user-library-read user-library-modify',
       redirect_uri: 'https://e5d89eb3486d.ngrok.io/auth/spotify/callback',
@@ -17,8 +17,8 @@ class HomeController < ApplicationController
       grant_type: "authorization_code",
       code: params[:code],
       redirect_uri: 'https://e5d89eb3486d.ngrok.io/auth/spotify/callback',
-      client_id: ENV['SPOTIFY_KEY'],
-      client_secret: ENV['SPOTIFY_SECRET']
+      client_id: session[:client_id],
+      client_secret: session[:client_secret]
     }
 
     resp = RestClient.post('https://accounts.spotify.com/api/token', param)
@@ -43,10 +43,16 @@ class HomeController < ApplicationController
 
     @credentials = spotify_user.credentials
     @user = User.find_by(user_id: @user_id)
+
     if @user
       @user.update(access_token: json_resp["access_token"], refresh_token: json_resp["refresh_token"])
     else
-      @user = User.create(user_id: @user_id, access_token: json_resp["access_token"], refresh_token: json_resp["refresh_token"])
+      @user = client.create_user(user_id: @user_id, access_token: json_resp["access_token"], refresh_token: json_resp["refresh_token"])
     end
   end
+
+  def client
+    Client.find_by(client_id: session[:client_id])
+  end
+
 end

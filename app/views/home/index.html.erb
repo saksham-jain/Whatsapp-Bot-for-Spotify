@@ -1,3 +1,5 @@
 <%= link_to 'Sign in with Spotify', "#{@url}#{@param.to_query}" %>
 <%= link_to 'Create Your own Spotify APP', 'https://developer.spotify.com/dashboard/login' %>
-<%= link_to 'Add Your APP into Spot_Search', new_client_path %>
+<% unless session[:client_id].present? %>  
+  <%= link_to 'Add Your APP into Spot_Search', new_client_path %>
+<% end %>
