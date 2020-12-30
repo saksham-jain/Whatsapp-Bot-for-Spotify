@@ -1,0 +1,6 @@
+<% if @client.errors.present? %>
+  toastr.error('<%= @client.errors.full_messages.first %>');
+<% else %>
+  toastr.success('Client Added Successfully');
+  window.location.href = "<%= root_path %>"
+<% end %>

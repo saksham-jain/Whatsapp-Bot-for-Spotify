@@ -1,32 +1,44 @@
-<% if session[:client_id].present? %>
-  <div class="card"> 
-    <div class="col-md-6 p-4 pl-md-0">
+<div class="mt-5 container ml-1 rounded-sm mx-auto w-80" style="background-color:#ffffff;">
+  <div class="card">
+    <div class="col-md-8 p-4 pl-md-0"> 
       <div class="ml-3 mr-2">
-        <h5><%= link_to 'Sign in with Spotify', "#{@url}#{@param.to_query}", class: "btn btn-primary" %></h5>
+        <h5>
+          STEP 1 - <%= link_to 'Create Your own Spotify APP', 'https://developer.spotify.com/dashboard/login', target: :_blank, class: "btn btn-primary btn-xl" %>
+        </h5>
         <p>something somethingsomethingsomething </p>
       </div>
     </div>
   </div>
-<% end %>
 
-<div class="card">
-  <div class="col-md-6 p-4 pl-md-0"> 
-    <div class="ml-3 mr-2">
-      <h5>
-        <%= link_to 'Create Your own Spotify APP', 'https://developer.spotify.com/dashboard/login', target: :_blank, class: "btn btn-primary" %>
-      </h5>
-      <p>something somethingsomethingsomething </p>
+    <div class="card"> 
+      <div class="col-md-8 p-4 pl-md-0">
+        <div class="ml-3 mr-2">
+         <h5>STEP 2 - <%= link_to 'Add Your APP in SpotSearch', new_client_path, class: "btn btn-primary btn-xl" %></h5>
+          <p>something somethingsomethingsomething </p>
+        </div>
+      </div>
     </div>
-  </div>
+
+    <div class="card"> 
+      <div class="col-md-8 p-4 pl-md-0">
+        <div class="ml-3 mr-2">
+          <h5>STEP 3 - <%= link_to 'Sign in with Spotify', "#{@url}#{@param.to_query}", class: "btn btn-primary btn-xl" %></h5>
+          <p>something somethingsomethingsomething </p>
+        </div>
+      </div>
+    </div>
 </div>
 
-<% unless session[:client_id].present? %>  
-  <div class="card"> 
-    <div class="col-md-6 p-4 pl-md-0">
-      <div class="ml-3 mr-2">
-        <h5><%= link_to 'Add Your APP in SpotSearch', new_client_path, class: "btn btn-primary" %></h5>
-        <p>something somethingsomethingsomething </p>
-      </div>
-    </div>
-  </div>
-<% end %>
+<style>
+  .btn-xl {
+    font-size: 20px;
+    border-radius: 10px;
+  }
+
+  p {
+    margin-left: 90px;
+  }
+
+</style>
+
+
