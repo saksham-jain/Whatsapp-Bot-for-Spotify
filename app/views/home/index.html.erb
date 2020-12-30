@@ -1,5 +1,32 @@
-<%= link_to 'Sign in with Spotify', "#{@url}#{@param.to_query}" %>
-<%= link_to 'Create Your own Spotify APP', 'https://developer.spotify.com/dashboard/login' %>
+<% if session[:client_id].present? %>
+  <div class="card"> 
+    <div class="col-md-6 p-4 pl-md-0">
+      <div class="ml-3 mr-2">
+        <h5><%= link_to 'Sign in with Spotify', "#{@url}#{@param.to_query}", class: "btn btn-primary" %></h5>
+        <p>something somethingsomethingsomething </p>
+      </div>
+    </div>
+</div>
+<% end %>
+
+<div class="card">
+  <div class="col-md-6 p-4 pl-md-0"> 
+    <div class="ml-3 mr-2">
+      <h5>
+        <%= link_to 'Create Your own Spotify APP', 'https://developer.spotify.com/dashboard/login', target: :_blank, class: "btn btn-primary" %>
+      </h5>
+      <p>something somethingsomethingsomething </p>
+    </div>
+  </div>
+</div>
+
 <% unless session[:client_id].present? %>  
-  <%= link_to 'Add Your APP into Spot_Search', new_client_path %>
+  <div class="card"> 
+    <div class="col-md-6 p-4 pl-md-0">
+      <div class="ml-3 mr-2">
+        <h5><%= link_to 'Add Your APP in SpotSearch', new_client_path, class: "btn btn-primary" %></h5>
+        <p>something somethingsomethingsomething </p>
+      </div>
+    </div>
+  </div>
 <% end %>

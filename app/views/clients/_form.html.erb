@@ -1,9 +1,14 @@
-<%= form_with model: Client, url: clients_path, remote: true do |form| %>
-  <%= form.label :client_id %>
-  <%= form.text_field :client_id, minlength: 32, maxlength: 32, required: true %>
-
-  <%= form.label :client_secret %>
-  <%= form.password_field :client_secret, minlength: 32, maxlength: 32, required: true %>
-
-  <%= form.submit 'Submit' %>
-<% end %>
+<div class="mt-5 container ml-1 px-6 border border-primary rounded-sm mx-auto w-50" style="background-color:#ffffff">
+  <%= form_with model: Client, url: clients_path, remote: true do |form| %>
+    <div class="form-group mt-1">
+      <%= form.label :client_id %>
+      <%= form.text_field :client_id, minlength: 32, maxlength: 32, required: true, class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= form.label :client_secret %>
+      <%= form.password_field :client_secret, minlength: 32, maxlength: 32, required: true, class: 'form-control' %>
+    </div>
+    <%= form.submit 'Submit', class: 'mb-3 btn btn-primary' %>
+  <% end %>
+</div>
