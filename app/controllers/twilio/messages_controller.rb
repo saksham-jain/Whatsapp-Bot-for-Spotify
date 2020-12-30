@@ -1,6 +1,6 @@
 class Twilio::MessagesController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :authenticate_user
+  before_action :setup_user, if: -> { params['Body'].split.first.eql? '#self' }
   before_action :set_user
 
   def create
@@ -9,7 +9,7 @@ class Twilio::MessagesController < ApplicationController
       tracks = RSpotify::Track.search(track_keyword).first(3)
       message = "Following are the track suggestions-\n"
       tracks.each_with_index { |track, i| message += "#{i+1}. #{track.name} by #{track.artists.map(&:name).join(',')}\n" } 
-      message += "Please type a number to add track in liked songs" ##{playlist.name} playlist
+      message += "Please type a number to add track in liked songs"
     else
       user_id = @user.user_id
       token = @user.access_token
@@ -20,7 +20,6 @@ class Twilio::MessagesController < ApplicationController
               'token' => token,
               'refresh_token' => refresh_token
             }})
-      #playlist = @user.playlists.first
 
       track = RSpotify::Track.search(session[:track_keyword]).first(3)[track_keyword.to_i - 1]
       #If you want to add in playlist
@@ -28,19 +27,17 @@ class Twilio::MessagesController < ApplicationController
         #playlist.add_tracks!([track_uri])   
       #If you want to add in liked song
       @user.save_tracks!([track])
-      message = "Track is added successfully!!"
+      message = "Track is added in liked songs successfully!!"
     end
-    response = Twilio::TwiML::MessagingResponse.new
-    response.message(body: message)
-    render xml: response.to_xml
 
+    send_message message
     session[:track_keyword] = track_keyword
   end
 
   private
 
   def set_user
-    @user = User.find_by(phone: params['From']) #User.find(session[:whatapp_user_id])
+    @user = User.find_by(phone: params['From']) || User.first
     if @user.access_token_expired?
       request_body = {
         grant_type: 'refresh_token', 
@@ -54,20 +51,18 @@ class Twilio::MessagesController < ApplicationController
     end
   end
 
-  def authenticate_user
-    unless User.find_by(phone: params['From'])#session[:whatapp_user_id].present?
-      client = Client.where("client_id like ?", "#{params['Body']}%").first
-      if client
-        #session[:whatapp_client_id] = client.id
-        #session[:whatapp_user_id] = client.user.id
-        client.user.update_attribute(:phone, params['From'])
-        message = "You can now search for your song"
-      else
-        message = "I don't know your spotify account, please enter first 4 digit of your client_id"
-      end
-      response = Twilio::TwiML::MessagingResponse.new
-      response.message(body: message)
-      return render xml: response.to_xml
+  def setup_user
+    client = Client.where("client_id like ?", "#{params['Body'].split.last}%").first
+    if client
+      client.user.update_attribute(:phone, params['From'])
+      message = "Your Spotify account is linked now\nYou can now search and like the song"
+      send_message message
     end
+  end
+
+  def send_message message
+    response = Twilio::TwiML::MessagingResponse.new
+    response.message(body: message)
+    return render xml: response.to_xml
   end
 end
