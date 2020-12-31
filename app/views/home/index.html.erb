@@ -1,6 +1,9 @@
-<div class="mt-5 container ml-1 rounded-sm mx-auto w-80" style="background-color:#ffffff;">
+<div class="container">
+  <h3 class="col-12 mt-4" style="font-family: monospace;">Follow these steps to setup your own SpotSearch</h3>
+</div>
+<div class="mt-2 container" style="background-color:#ffeeee;">
   <div class="card">
-    <div class="col-md-8 p-4 pl-md-0"> 
+    <div class="col-12 p-4 pl-md-0" style="background-color:#ffaaee;"> 
       <div class="ml-3 mr-2">
         <h5>
           STEP 1 - <%= link_to 'Create Your own Spotify APP', 'https://developer.spotify.com/dashboard/login', target: :_blank, class: "btn btn-primary btn-xl" %>
@@ -11,7 +14,7 @@
   </div>
 
     <div class="card"> 
-      <div class="col-md-8 p-4 pl-md-0">
+      <div class="col-12 p-4 pl-md-0" style="background-color:#f0e68c;">
         <div class="ml-3 mr-2">
          <h5>STEP 2 - <%= link_to 'Add Your APP in SpotSearch', new_client_path, class: "btn btn-primary btn-xl" %></h5>
           <p>something somethingsomethingsomething </p>
@@ -20,7 +23,7 @@
     </div>
 
     <div class="card"> 
-      <div class="col-md-8 p-4 pl-md-0">
+      <div class="col-12 p-4 pl-md-0" style="background-color:#b6dec8;">
         <div class="ml-3 mr-2">
           <h5>STEP 3 - <%= link_to 'Sign in with Spotify', "#{@url}#{@param.to_query}", class: "btn btn-primary btn-xl" %></h5>
           <p>something somethingsomethingsomething </p>
@@ -28,17 +31,5 @@
       </div>
     </div>
 </div>
-
-<style>
-  .btn-xl {
-    font-size: 20px;
-    border-radius: 10px;
-  }
-
-  p {
-    margin-left: 90px;
-  }
-
-</style>
-
+  
 

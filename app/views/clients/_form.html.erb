@@ -1,6 +1,6 @@
-<div class="mt-5 container ml-1 px-6 border border-primary rounded-sm mx-auto w-50" style="background-color:#ffffff">
+<div class="mt-5 container px-6 border border-primary rounded-sm col-8" style="background-color:#e6e6fa">
   <%= form_with model: Client, url: clients_path, remote: true do |form| %>
-    <div class="form-group mt-1">
+    <div class="form-group mt-3">
       <%= form.label :client_id %>
       <%= form.text_field :client_id, minlength: 32, maxlength: 32, required: true, class: 'form-control' %>
     </div>
@@ -9,6 +9,6 @@
       <%= form.label :client_secret %>
       <%= form.password_field :client_secret, minlength: 32, maxlength: 32, required: true, class: 'form-control' %>
     </div>
-    <%= form.submit 'Submit', class: 'mb-3 btn btn-primary' %>
+    <%= form.submit 'Submit', class: 'mb-3 btn btn-primary mb-4' %>
   <% end %>
 </div>
