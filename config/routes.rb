@@ -7,5 +7,5 @@ Rails.application.routes.draw do
     resources :clients, only: %I(new create)
   namespace :twilio do
       post 'messages', to: 'messages#create'
-    end
+  end
 end

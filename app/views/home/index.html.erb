@@ -3,14 +3,16 @@
 </div>
 <div class="mt-2 container" style="background-color:#ffeeee;">
   <div class="card">
-    <div class="col-12 p-4 pl-md-0" style="background-color:#ffaaee;"> 
+    <div class="col-12 p-4 pl-md-0" style="background-color:#dcdcdc;"> 
       <div class="ml-3 mr-2">
         <h5>
           STEP 1 - <%= link_to 'Create Your own Spotify APP', 'https://developer.spotify.com/dashboard/login', target: :_blank, class: "btn btn-primary btn-xl" %>
         </h5>
         <p>
-          This will redirect you to Spotify Developer dashboard. Create you app by following steps mentioned on Medium Post
-          <br># Link to post #
+          This will redirect you to Spotify Developer dashboard. Create you app by following steps mentioned on
+          <br>
+          <a href="https://sakshamjain16.medium.com/guide-to-set-up-your-own-whatsapp-bot-to-search-the-song-and-add-into-your-spotify-list-ead646a8b987">Medium Post</a>
+          
         </p>
       </div>
     </div>
@@ -31,7 +33,7 @@
       <div class="col-12 p-4 pl-md-0" style="background-color:#b6dec8;">
         <div class="ml-3 mr-2">
           <h5>STEP 3 - <%= link_to 'Sign in with Spotify', "#{@url}#{@param.to_query}", class: "btn btn-primary btn-xl" %></h5>
-          <p>something somethingsomethingsomething </p>
+          <p>After filling form in STEP 2, click on this button to give SpotSearch permission to add songs in your Playlist</p>
         </div>
       </div>
     </div>
