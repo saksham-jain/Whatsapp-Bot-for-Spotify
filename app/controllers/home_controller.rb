@@ -5,8 +5,8 @@ class HomeController < ApplicationController
     @param = {
       client_id: session[:client_id],
       response_type: "code",
-      scope: 'user-read-email playlist-modify-public user-library-read user-library-modify',
-      redirect_uri: 'https://e5d89eb3486d.ngrok.io/auth/spotify/callback',
+      scope: 'playlist-modify-public user-library-read user-library-modify',
+      redirect_uri: "https://#{request.host}/auth/spotify/callback",
       show_dialog: true
     }
     @url = "https://accounts.spotify.com/authorize?"
@@ -16,7 +16,7 @@ class HomeController < ApplicationController
     param = {
       grant_type: "authorization_code",
       code: params[:code],
-      redirect_uri: 'https://e5d89eb3486d.ngrok.io/auth/spotify/callback',
+      redirect_uri: "https://#{request.host}/auth/spotify/callback",
       client_id: session[:client_id],
       client_secret: session[:client_secret]
     }

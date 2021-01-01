@@ -55,7 +55,10 @@ class Twilio::MessagesController < ApplicationController
     client = Client.where("client_id like ?", "#{params['Body'].split.last}%").first
     if client
       client.user.update_attribute(:phone, params['From'])
-      message = "Your Spotify account is linked now\nYou can now search and like the song"
+      message = "Your Spotify account is linked now!\nYou can now search and like the song"
+      send_message message
+    else
+      message = "You have entered wrong ClientId\n Or you may have not registered first"
       send_message message
     end
   end
